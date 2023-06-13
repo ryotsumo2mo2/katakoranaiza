@@ -296,7 +296,7 @@ const main = (fr0) =>{
 			  // マーカー 枠線の色
 			  borderColor: 'rgba(0, 159, 255, 0.5)',
 			  // マーカー 大きさ
-			  pointRadius: 5,
+			  pointRadius: 1,
 			},
 			  // Group 2
 		   {
@@ -304,7 +304,7 @@ const main = (fr0) =>{
 			  data: gurahukax,
 			  backgroundColor: 'rgba(255, 48, 32, 0.45)',
 			  borderColor: 'rgba(255, 48, 32, 0.5)',
-			  pointRadius: 5,
+			  pointRadius: 1,
 			  },
   
 			// Group 2
@@ -313,7 +313,7 @@ const main = (fr0) =>{
 			  data: gurahukay,
 			  backgroundColor: 'rgba(10, 130, 50, 0.45)',
 			  borderColor: 'rgba(10, 130, 50, 0.5)',
-			  pointRadius: 5,
+			  pointRadius: 1,
 			},],
         },
         // options: {}, ...
