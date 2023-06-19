@@ -184,6 +184,8 @@ function updateTable ( state ) {
 	savedData.push( darray );
 }
 
+//プラスボタン、マイナスボタン、ダウンロードボタンを削除
+
 function dft(f) //周波数成分配列
 {
     const N = f.length, T = -2 * Math.PI / N;
