@@ -184,51 +184,6 @@ function updateTable ( state ) {
 	savedData.push( darray );
 }
 
-
-buttonLedPls.addEventListener ( 'click', function () {
-
-	console.log( 'LED Plus Button Clicked' );
-	leafony.sendCommand( 'PLS' );
-
-});
-
-
-buttonLedMns.addEventListener( 'click', function () {
-
-	console.log( 'LED Minus Button Clicked' );
-	leafony.sendCommand( 'MNS' );
-
-});
-
-
-buttonDownload.addEventListener( 'click', function () {
-
-	let bom_utf_8 = new Uint8Array( [ 0xEF, 0xBB, 0xBF ] );
-	let csvText = "";
-
-	csvText += "Datetime,Device Name,Unique Name,Temp,Humid,Light,Tilt,BattVolt,Dice\n";
-	// Write all received data in savedData
-	for ( var i = 0; i < savedData.length; i++ ) {
-		for ( var j = 0; j < savedData[i].length; j++ ) {
-			csvText += savedData[i][j];
-			if ( j == savedData[i].length - 1 ) csvText += "\n";
-			else csvText += ",";
-		}
-	}
-
-	let blob = new Blob( [ bom_utf_8, csvText ], { "type": "text/csv" } );
-
-	let url = window.URL.createObjectURL( blob );
-
-	let downloader = document.getElementById( "downloader" );
-	downloader.download = "data.csv";
-	downloader.href = url;
-	$( "#downloader" )[0].click();
-
-	delete csvText;
-	delete blob;
-});
-
 function dft(f) //周波数成分配列
 {
     const N = f.length, T = -2 * Math.PI / N;
