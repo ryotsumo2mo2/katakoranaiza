@@ -126,14 +126,14 @@ function idft(F) //複素数の時系列
 function clearTable () {
 
 	textDeviceName.innerHTML = '';
-	textUniqueName.innerHTML = '';
-	textDateTime.innerHTML = '';
-	textTemp.innerHTML = '';
-	textHumid.innerHTML = '';
-	textIllum.innerHTML = '';
-	textTilt.innerHTML = '';
-	textBatt.innerHTML = '';
-	textDice.innerHTML = '';
+	//textUniqueName.innerHTML = '';
+	//textDateTime.innerHTML = '';
+	//textTemp.innerHTML = '';
+	//textHumid.innerHTML = '';
+	//textIllum.innerHTML = '';
+	//textTilt.innerHTML = '';
+	//textBatt.innerHTML = '';
+	//textDice.innerHTML = '';
 
 }
 
