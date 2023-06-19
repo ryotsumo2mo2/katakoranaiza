@@ -26,7 +26,6 @@ const textTilt = document.getElementById('textTilt');
 const textBatt = document.getElementById('textBatt');
 const textDice = document.getElementById('textDice');
 
-const textAppN = document.getElementById('AppN'); // 追加点
 
 
 const buttonConnect = document.getElementById('ble-connect-button');
@@ -36,7 +35,6 @@ const buttonLedMns = document.getElementById('button-led-mns');
 const buttonDownload = document.getElementById("button-download");
 
 const switchSleepMode = document.getElementById('sleepmode-switch');
-
 
 let leafony;
 
@@ -124,16 +122,16 @@ function idft(F) //複素数の時系列
 
 
 function clearTable () {
+
 	textDeviceName.innerHTML = '';
-	//textUniqueName.innerHTML = '';
-	//textDateTime.innerHTML = '';
-	//textTemp.innerHTML = '';
-	//textHumid.innerHTML = '';
-	//textIllum.innerHTML = '';
-	//textTilt.innerHTML = '';
-	//textBatt.innerHTML = '';
-	//textDice.innerHTML = '';
-	textAppN.innerHTML = '';
+	textUniqueName.innerHTML = '';
+	textDateTime.innerHTML = '';
+	textTemp.innerHTML = '';
+	textHumid.innerHTML = '';
+	textIllum.innerHTML = '';
+	textTilt.innerHTML = '';
+	textBatt.innerHTML = '';
+	textDice.innerHTML = '';
 
 }
 
@@ -159,12 +157,11 @@ function updateTable ( state ) {
 	textTilt.innerText = state.tilt;
 	textBatt.innerText = state.batt;
 	textDice.innerText = state.dice;
-        //textAppN.innerText = state.AppN;
+
 	
 
 	kasokudocount.push (state.temp,state.humd,state.illm,state.tilt,state.batt,state.dice) ;
 	console.log(kasokudocount);
-	AppN = 1 ;
 
 
 
@@ -187,7 +184,55 @@ function updateTable ( state ) {
 	savedData.push( darray );
 }
 
-//プラスボタン、マイナスボタン、ダウンロードボタンを削除
+
+buttonLedPls.addEventListener ( 'click', function () {
+
+	console.log( 'LED Plus Button Clicked' );
+	leafony.sendCommand( 'PLS' );
+
+});
+
+
+buttonLedMns.addEventListener( 'click', function () {
+
+	console.log( 'LED Minus Button Clicked' );
+	leafony.sendCommand( 'MNS' );
+
+});
+
+
+buttonDownload.addEventListener( 'click', function () {
+
+	let bom_utf_8 = new Uint8Array( [ 0xEF, 0xBB, 0xBF ] );
+	let csvText = "";
+
+	csvText += "Datetime,Device Name,Unique Name,Temp,Humid,Light\n";
+	// Write all received data in savedData
+	for ( var i = 0; i < savedData.length; i++ ) {
+		for ( var j = 0; j < savedData[i].length-3; j++ ) {
+			csvText += savedData[i][j];
+			if ( j == savedData[i].length - 4 ) csvText += "\n";
+			else csvText += ",";
+		}
+		for ( var j = savedData[i].length-6; j < savedData[i].length; j++ ) {
+			csvText += savedData[i][j];
+			if ( j == savedData[i].length - 1 ) csvText += "\n";
+			else csvText += ",";
+		}
+	}
+
+	let blob = new Blob( [ bom_utf_8, csvText ], { "type": "text/csv" } );
+
+	let url = window.URL.createObjectURL( blob );
+
+	let downloader = document.getElementById( "downloader" );
+	downloader.download = "data.csv";
+	downloader.href = url;
+	$( "#downloader" )[0].click();
+
+	delete csvText;
+	delete blob;
+});
 
 function dft(f) //周波数成分配列
 {
@@ -209,6 +254,7 @@ function idft(F) //複素数の時系列
 const main = (fr0) =>{
 //	const NN = [0.83,0.85]
 //    const fr0 = kasokudocount;
+//	const NN = [0,1,-0.95,0,2,-0.79,0,3,-0.67,0,4,-0.88,0,5,-0.95,0,6,-0.79,0,7,-0.67,0,8,-0.88,0,9,-0.95,0,10,-0.79,0,11,-0.67,0,12,-0.88]; //一行追加
     const f0 = fr0.map(r => [r, 0]);
 
 	var fz = [];
@@ -241,30 +287,6 @@ const main = (fr0) =>{
     console.log("Fz:", Fz);
     console.log("Fx:", Fx);
     console.log("Fy:", Fy);
-
-	//------------------------ 以下追加点----------------振幅の最大値による評価
-for (var i = 0; i < Fz.length; i++) {
-	var item = Fz[i]; // Fzの軸を観察
-  // syuhasuが30から70の範囲にあり、sinpukuの最大値が0.07以上である場合
-  if (item.x >= 30 && item.x <= 70 && getMaxSinpuku(Fz) >= 0.07) { AppN = 5;} // verybad
-  else if (item.x >= 30 && item.x <= 70 && getMaxSinpuku(Fz) >= 0.05 && getMaxSinpuku(Fz) > 0.07) { AppN = 6;} // bad
-  else if (item.x >= 30 && item.x <= 70 && getMaxSinpuku(Fz) >= 0.03 && getMaxSinpuku(Fz) > 0.05) { AppN = 7;} // good
-  else if (item.x >= 30 && item.x <= 70 && getMaxSinpuku(Fz) > 0.03) { AppN = 8;} // verygood
-}
-
-// sinpukuの最大値を取得する関数
-function getMaxSinpuku(array) {
-  var max = -Infinity;
-  for (var i = 0; i < array.length; i++) {
-    var sinpuku = array[i].y;
-    if (sinpuku > max) {
-      max = sinpuku;
-    }
-  }
-  return max;
-}
-//---------------------------以上追加点
-	
     //console.log("f1:", f1);
     //console.log("fr1:", fr1.map(Math.round));
     //console.log("gurahu:", gurahuka);
