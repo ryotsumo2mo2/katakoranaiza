@@ -36,6 +36,8 @@ const buttonDownload = document.getElementById("button-download");
 
 const switchSleepMode = document.getElementById('sleepmode-switch');
 
+const appN = 0 ;
+
 let leafony;
 
 // array of received data
@@ -162,6 +164,7 @@ function updateTable ( state ) {
 
 	kasokudocount.push (state.temp,state.humd,state.illm,state.tilt,state.batt,state.dice) ;
 	console.log(kasokudocount);
+	appN = 1 ;
 
 
 
@@ -238,6 +241,30 @@ const main = (fr0) =>{
     console.log("Fz:", Fz);
     console.log("Fx:", Fx);
     console.log("Fy:", Fy);
+
+	//------------------------ 以下追加点----------------振幅の最大値による評価
+for (var i = 0; i < Fz.length; i++) {
+	var item = Fz[i]; // Fzの軸を観察
+  // syuhasuが30から70の範囲にあり、sinpukuの最大値が0.07以上である場合
+  if (item.x >= 30 && item.x <= 70 && getMaxSinpuku(Fz) >= 0.07) { appN = 5;} // verybad
+  else if (item.x >= 30 && item.x <= 70 && getMaxSinpuku(Fz) >= 0.05 && getMaxSinpuku(Fz) > 0.07) { appN = 6;} // bad
+  else if (item.x >= 30 && item.x <= 70 && getMaxSinpuku(Fz) >= 0.03 && getMaxSinpuku(Fz) > 0.05) { appN = 7;} // good
+  else if (item.x >= 30 && item.x <= 70 && getMaxSinpuku(Fz) > 0.03) { appN = 8;} // verygood
+}
+
+// sinpukuの最大値を取得する関数
+function getMaxSinpuku(array) {
+  var max = -Infinity;
+  for (var i = 0; i < array.length; i++) {
+    var sinpuku = array[i].y;
+    if (sinpuku > max) {
+      max = sinpuku;
+    }
+  }
+  return max;
+}
+//---------------------------以上追加点
+	
     //console.log("f1:", f1);
     //console.log("fr1:", fr1.map(Math.round));
     //console.log("gurahu:", gurahuka);
