@@ -26,7 +26,7 @@ const textTilt = document.getElementById('textTilt');
 const textBatt = document.getElementById('textBatt');
 const textDice = document.getElementById('textDice');
 
-const appN = document.getElementById('appN'); // 追加点
+const textAppN = document.getElementById('AppN'); // 追加点
 
 
 const buttonConnect = document.getElementById('ble-connect-button');
@@ -124,7 +124,6 @@ function idft(F) //複素数の時系列
 
 
 function clearTable () {
-
 	textDeviceName.innerHTML = '';
 	//textUniqueName.innerHTML = '';
 	//textDateTime.innerHTML = '';
@@ -134,6 +133,7 @@ function clearTable () {
 	//textTilt.innerHTML = '';
 	//textBatt.innerHTML = '';
 	//textDice.innerHTML = '';
+	textAppN.innerHTML = '';
 
 }
 
@@ -159,12 +159,12 @@ function updateTable ( state ) {
 	textTilt.innerText = state.tilt;
 	textBatt.innerText = state.batt;
 	textDice.innerText = state.dice;
-
+        //textAppN.innerText = state.AppN;
 	
 
 	kasokudocount.push (state.temp,state.humd,state.illm,state.tilt,state.batt,state.dice) ;
 	console.log(kasokudocount);
-	appN = 1 ;
+	AppN = 1 ;
 
 
 
@@ -246,10 +246,10 @@ const main = (fr0) =>{
 for (var i = 0; i < Fz.length; i++) {
 	var item = Fz[i]; // Fzの軸を観察
   // syuhasuが30から70の範囲にあり、sinpukuの最大値が0.07以上である場合
-  if (item.x >= 30 && item.x <= 70 && getMaxSinpuku(Fz) >= 0.07) { appN = 5;} // verybad
-  else if (item.x >= 30 && item.x <= 70 && getMaxSinpuku(Fz) >= 0.05 && getMaxSinpuku(Fz) > 0.07) { appN = 6;} // bad
-  else if (item.x >= 30 && item.x <= 70 && getMaxSinpuku(Fz) >= 0.03 && getMaxSinpuku(Fz) > 0.05) { appN = 7;} // good
-  else if (item.x >= 30 && item.x <= 70 && getMaxSinpuku(Fz) > 0.03) { appN = 8;} // verygood
+  if (item.x >= 30 && item.x <= 70 && getMaxSinpuku(Fz) >= 0.07) { AppN = 5;} // verybad
+  else if (item.x >= 30 && item.x <= 70 && getMaxSinpuku(Fz) >= 0.05 && getMaxSinpuku(Fz) > 0.07) { AppN = 6;} // bad
+  else if (item.x >= 30 && item.x <= 70 && getMaxSinpuku(Fz) >= 0.03 && getMaxSinpuku(Fz) > 0.05) { AppN = 7;} // good
+  else if (item.x >= 30 && item.x <= 70 && getMaxSinpuku(Fz) > 0.03) { AppN = 8;} // verygood
 }
 
 // sinpukuの最大値を取得する関数
