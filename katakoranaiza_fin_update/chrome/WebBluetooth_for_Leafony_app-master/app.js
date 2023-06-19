@@ -9,6 +9,7 @@
  //import { set } from "./furie";
 
  const ctx = document.getElementById('chart');
+const appN = document.getElementById('appN');
 
 function expi(theta) {return [Math.cos(theta), Math.sin(theta)];}
 function iadd([ax, ay], [bx, by]) {return [ax + bx, ay + by];}
@@ -52,6 +53,7 @@ window.onload = function () {
 
 let kasokudocount = [] ;
 let called = false;
+appN = 0 ; // 0 = 起動時の画面
 
 function gobyokan () {
 	if (called || !(kasokudocount.length > 6200 ))return
