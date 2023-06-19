@@ -26,6 +26,7 @@ const textTilt = document.getElementById('textTilt');
 const textBatt = document.getElementById('textBatt');
 const textDice = document.getElementById('textDice');
 
+const appN = document.getElementById('appN'); // 追加点
 
 
 const buttonConnect = document.getElementById('ble-connect-button');
@@ -36,7 +37,6 @@ const buttonDownload = document.getElementById("button-download");
 
 const switchSleepMode = document.getElementById('sleepmode-switch');
 
-const appN = 0 ;
 
 let leafony;
 
