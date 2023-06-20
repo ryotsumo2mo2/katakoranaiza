@@ -26,7 +26,8 @@ const textTilt = document.getElementById('textTilt');
 const textBatt = document.getElementById('textBatt');
 const textDice = document.getElementById('textDice');
 
-
+var AppN = 0;
+console.log(AppN)
 
 const buttonConnect = document.getElementById('ble-connect-button');
 const buttonDisconnect = document.getElementById('ble-disconnect-button');
@@ -64,8 +65,10 @@ setTimeout(main(kasokudocount),10000)
 buttonConnect.addEventListener( 'click', function () {
 
 	leafony = new Leafony();
+	AppN = 10;
+	console.log(AppN)
 	leafony.onStateChange( function ( state ) {
-//		console.log(called);
+		//console.log(called);
 		gobyokan();
 		updateTable( state );
 	} );
@@ -162,6 +165,9 @@ function updateTable ( state ) {
 
 	kasokudocount.push (state.temp,state.humd,state.illm,state.tilt,state.batt,state.dice) ;
 	console.log(kasokudocount);
+	var percentage = kasokudocount.length*0.016 ;
+	var roundedPercentage = Number(percentage.toFixed(2));
+	console.log(roundedPercentage); // 現在のパーセンテージの表示
 
 
 
@@ -290,6 +296,41 @@ const main = (fr0) =>{
     //console.log("f1:", f1);
     //console.log("fr1:", fr1.map(Math.round));
     //console.log("gurahu:", gurahuka);
+	console.log("gurahukaz:", gurahukaz);
+    console.log("gurahukax:", gurahukax);
+    console.log("gurahukay:", gurahukay);
+
+	leafony.disconnect();
+	leafony = null;
+
+
+//以下追加点------------------状態評価条件
+
+// 配列Fzの例
+  var maxSinpuku = 0; // sinpukuの最大値を格納する変数
+  var countInRange = 0; // 指定の範囲に該当するデータの数をカウントする変数
+  
+  for (var i = 0; i < gurahukaz.length; i++) {
+	var data = gurahukaz[i];
+	if (data.x >= 30 && data.x <= 70) {
+	  countInRange++;
+	  if (data.y > maxSinpuku) {
+		maxSinpuku = data.y;
+	  }
+	}
+  }
+  // sinpukuの最大値を出力
+  console.log("sinpukuの最大値:", maxSinpuku);
+  // sinpukuの値に基づいて画像を表示する処理を追加してください
+  if ( maxSinpuku >= 0.07) { AppN = 5;} // verybad
+  else if ( maxSinpuku >= 0.05 && maxSinpuku > 0.07) { AppN = 6;} // bad
+  else if ( maxSinpuku >= 0.03 && maxSinpuku > 0.05) { AppN = 7;} // good
+  else if ( maxSinpuku < 0.03) { AppN = 8;} // verygood
+  // 指定の範囲に該当するデータの数を出力
+  console.log("指定の範囲に該当するデータの数:", countInRange);
+  console.log(AppN)
+
+//以上追加点------------------
 
     const myChart = new Chart(ctx, {
         type: 'scatter',
