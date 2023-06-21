@@ -26,8 +26,19 @@ const textTilt = document.getElementById('textTilt');
 const textBatt = document.getElementById('textBatt');
 const textDice = document.getElementById('textDice');
 
+var image = document.getElementById('image');
 var AppN = 0;
+var Hyoka = 'Health for humanity';
+var Bun = 'Take measurements about your KATAKORI.';
+
 console.log(AppN)
+console.log(Hyoka)
+//document.getElementById('imagechange').innerText = AppN;
+document.getElementById('Hyokachange').innerText = Hyoka;
+document.getElementById('Bunchange').innerHTML = Bun;
+Hyokachange.style.color = '#000000';
+
+//条件文の発信箇所１
 
 const buttonConnect = document.getElementById('ble-connect-button');
 const buttonDisconnect = document.getElementById('ble-disconnect-button');
@@ -67,6 +78,16 @@ buttonConnect.addEventListener( 'click', function () {
 	leafony = new Leafony();
 	AppN = 10;
 	console.log(AppN)
+	//document.getElementById('imagechange').innerText = AppN;
+
+	Hyoka = 'Connecting...';
+	document.getElementById('Hyokachange').innerText = Hyoka;
+
+	Bun = 'Attempt to set up a Bluetooth connection with Leafony...';
+	document.getElementById('Bunchange').innerHTML = Bun;
+	console.log(Hyoka)
+	
+	
 	leafony.onStateChange( function ( state ) {
 		//console.log(called);
 		gobyokan();
@@ -126,16 +147,17 @@ function idft(F) //複素数の時系列
 
 function clearTable () {
 
-	textDeviceName.innerHTML = '';
+	//textDeviceName.innerHTML = '';
 	textUniqueName.innerHTML = '';
 	textDateTime.innerHTML = '';
+	/*
 	textTemp.innerHTML = '';
 	textHumid.innerHTML = '';
 	textIllum.innerHTML = '';
 	textTilt.innerHTML = '';
 	textBatt.innerHTML = '';
 	textDice.innerHTML = '';
-
+	*/
 }
 
 
@@ -148,26 +170,35 @@ function updateTable ( state ) {
 	let hours    = ( '00' + date.getHours() ).slice( -2 );
 	let minutes  = ( '00' + date.getMinutes() ).slice( -2 );
 	let seconds  = ( '00' + date.getSeconds() ).slice( -2 );
-	let datetime = year + '/' + month + '/' + day + ' ' +
-				   hours + ':' + minutes + ':' + seconds;
+	let datetime = year + '/' + month + '/' + day ; //+ ' ' + hours + ':' + minutes + ':' + seconds;
 
-	textDeviceName.innerText = state.devn;
+	//textDeviceName.innerText = state.devn;
 	textUniqueName.innerText = state.unin;
 	textDateTime.innerText = datetime;
-	textTemp.innerText = state.temp;
-	textHumid.innerText = state.humd;
-	textIllum.innerText = state.illm;
-	textTilt.innerText = state.tilt;
-	textBatt.innerText = state.batt;
-	textDice.innerText = state.dice;
+	//textTemp.innerText = state.temp;
+	//textHumid.innerText = state.humd;
+	//textIllum.innerText = state.illm;
+	//textTilt.innerText = state.tilt;
+	//textBatt.innerText = state.batt;
+	//textDice.innerText = state.dice;
 
 	
 
 	kasokudocount.push (state.temp,state.humd,state.illm,state.tilt,state.batt,state.dice) ;
 	console.log(kasokudocount);
-	var percentage = kasokudocount.length*0.016 ;
-	var roundedPercentage = Number(percentage.toFixed(2));
+	var percentage = kasokudocount.length*0.016118633 ;
+	var roundedPercentage = Number(percentage.toFixed(0))+' %';
+	if(percentage > '100'){
+		roundedPercentage = ' ';
+		document.getElementById('paa').innerText = roundedPercentage;
+	}else if(percentage < '100'){
 	console.log(roundedPercentage); // 現在のパーセンテージの表示
+	document.getElementById('paa').innerText = roundedPercentage;
+	Bun = 'Please wait a few moments for the results...';
+	document.getElementById('Bunchange').innerHTML = Bun;
+	Hyoka = 'Measuring...';
+	document.getElementById('Hyokachange').innerText = Hyoka;
+	}
 
 
 
@@ -190,7 +221,7 @@ function updateTable ( state ) {
 	savedData.push( darray );
 }
 
-
+/*
 buttonLedPls.addEventListener ( 'click', function () {
 
 	console.log( 'LED Plus Button Clicked' );
@@ -239,6 +270,7 @@ buttonDownload.addEventListener( 'click', function () {
 	delete csvText;
 	delete blob;
 });
+*/
 
 function dft(f) //周波数成分配列
 {
@@ -322,16 +354,49 @@ const main = (fr0) =>{
   // sinpukuの最大値を出力
   console.log("sinpukuの最大値:", maxSinpuku);
   // sinpukuの値に基づいて画像を表示する処理を追加してください
-  if ( maxSinpuku >= 0.07) { AppN = 5;} // verybad
-  else if ( maxSinpuku >= 0.05 && maxSinpuku > 0.07) { AppN = 6;} // bad
-  else if ( maxSinpuku >= 0.03 && maxSinpuku > 0.05) { AppN = 7;} // good
-  else if ( maxSinpuku < 0.03) { AppN = 8;} // verygood
+  if ( maxSinpuku >= 0.07) {
+	 image.src = 'image/verybad.png';
+	 AppN = 5;
+	 Hyoka = 'Very hard!';
+	 document.getElementById('Hyokachange').innerText = Hyoka;
+	 Hyokachange.style.color = '#E64242';
+	 Bun = '・Give massages and stretches to relax the muscles. <br>Consult a specialist to learn how to do this properly.<br>・Try using warm towels or compresses to relieve stiffness.<br>・Pay attention to your posture in daily life and try not to stay in the same position for long periods of time.';
+	 document.getElementById('Bunchange').innerHTML = Bun;
+	} // verybad
+  else if ( maxSinpuku >= 0.05 && maxSinpuku > 0.07) {
+	image.src = 'image/bad.png';
+	 AppN = 6;
+	 Hyoka = 'Hard';
+	 document.getElementById('Hyokachange').innerText = Hyoka;
+	 Hyokachange.style.color = '#E5C842';
+	 Bun = '・Include stretches and light exercises to stretch the shoulder and neck muscles and relieve muscle tension.<br>・Take moderate breaks when working at a desk or using a smartphone for long periods of time in order to maintain the middle posture.<br>・Consider incorporating light strength training to strengthen the muscles around the shoulders.';
+	 document.getElementById('Bunchange').innerHTML = Bun;
+	} // bad
+  else if ( maxSinpuku >= 0.03 && maxSinpuku > 0.05) {
+	image.src = 'image/good.png';
+	 AppN = 7;
+	 Hyoka = 'Soft';
+	 document.getElementById('Hyokachange').innerText = Hyoka;
+	 Hyokachange.style.color = '#4AE642';
+	 Bun = '・Pay attention to your posture in everyday life. <br>Maintaining correct posture helps prevent stiff shoulders.<br>・Do daily stretching and light exercise to keep shoulder and neck muscles soft.<br>・It is important to take some time out of your busy routine and create a relaxing environment. <br>Get some rest to reduce stress.';
+	 document.getElementById('Bunchange').innerHTML = Bun;
+	} // good
+  else if ( maxSinpuku < 0.03) {
+	image.src = 'image/verygood.png';
+	 AppN = 8;
+	 Hyoka = 'Very soft!';
+	 document.getElementById('Hyokachange').innerText = Hyoka;
+	 Hyokachange.style.color = '#425FE6';
+	 Bun = '・Although you do not seem to have any symptoms of stiff shoulders at present, <br>try to prevent it by paying attention to your posture and exercise habits in your daily life.<br>・Keep your muscles healthy by regularly stretching and strength training.<br>・Take moderate breaks and adjust your posture when working at a desk or using a smartphone for long periods of time.';
+	 document.getElementById('Bunchange').innerHTML = Bun;
+	} // verygood
   // 指定の範囲に該当するデータの数を出力
   console.log("指定の範囲に該当するデータの数:", countInRange);
   console.log(AppN)
+  //document.getElementById('imagechange').innerText = AppN;
 
-//以上追加点------------------
-
+	//以上追加点------------------
+  /*
     const myChart = new Chart(ctx, {
         type: 'scatter',
         data: {
@@ -366,7 +431,7 @@ const main = (fr0) =>{
         // options: {}, ...
       });
       console.log(myChart);
-
+	  */
 }
 
 const kansuu = ( F ) => 
