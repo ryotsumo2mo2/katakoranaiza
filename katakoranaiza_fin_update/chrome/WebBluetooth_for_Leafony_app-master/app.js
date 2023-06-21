@@ -360,7 +360,7 @@ const main = (fr0) =>{
 	 Hyoka = 'Very hard!';
 	 document.getElementById('Hyokachange').innerText = Hyoka;
 	 Hyokachange.style.color = '#E64242';
-	 Bun = '・Give massages and stretches to relax the muscles. <br>Consult a specialist to learn how to do this properly.<br>・Try using warm towels or compresses to relieve stiffness.<br>・Pay attention to your posture in daily life and try not to stay in the same position for long periods of time.';
+	 Bun = '・Give massages and stretches to relax the muscles. <br>Consult a specialist to learn how to do this properly.<br><br>・Try using warm towels or compresses to relieve stiffness.<br><br>・Pay attention to your posture in daily life and try not to stay in the same position for long periods of time.';
 	 document.getElementById('Bunchange').innerHTML = Bun;
 	} // verybad
   else if ( maxSinpuku >= 0.05 && maxSinpuku > 0.07) {
@@ -369,7 +369,7 @@ const main = (fr0) =>{
 	 Hyoka = 'Hard';
 	 document.getElementById('Hyokachange').innerText = Hyoka;
 	 Hyokachange.style.color = '#E5C842';
-	 Bun = '・Include stretches and light exercises to stretch the shoulder and neck muscles and relieve muscle tension.<br>・Take moderate breaks when working at a desk or using a smartphone for long periods of time in order to maintain the middle posture.<br>・Consider incorporating light strength training to strengthen the muscles around the shoulders.';
+	 Bun = '・Include stretches and light exercises to stretch the shoulder and neck muscles and relieve muscle tension.<br><br>・Take moderate breaks when working at a desk or using a smartphone for long periods of time in order to maintain the middle posture.<br><br>・Consider incorporating light strength training to strengthen the muscles around the shoulders.';
 	 document.getElementById('Bunchange').innerHTML = Bun;
 	} // bad
   else if ( maxSinpuku >= 0.03 && maxSinpuku > 0.05) {
@@ -378,7 +378,7 @@ const main = (fr0) =>{
 	 Hyoka = 'Soft';
 	 document.getElementById('Hyokachange').innerText = Hyoka;
 	 Hyokachange.style.color = '#4AE642';
-	 Bun = '・Pay attention to your posture in everyday life. <br>Maintaining correct posture helps prevent stiff shoulders.<br>・Do daily stretching and light exercise to keep shoulder and neck muscles soft.<br>・It is important to take some time out of your busy routine and create a relaxing environment. <br>Get some rest to reduce stress.';
+	 Bun = '・Pay attention to your posture in everyday life. <br>Maintaining correct posture helps prevent stiff shoulders.<br><br>・Do daily stretching and light exercise to keep shoulder and neck muscles soft.<br><br>・It is important to take some time out of your busy routine and create a relaxing environment. <br>Get some rest to reduce stress.';
 	 document.getElementById('Bunchange').innerHTML = Bun;
 	} // good
   else if ( maxSinpuku < 0.03) {
