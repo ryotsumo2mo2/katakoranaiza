@@ -196,7 +196,7 @@ function updateTable ( state ) {
 	document.getElementById('paa').innerText = roundedPercentage;
 	Bun = 'Please wait a few moments for the results...';
 	document.getElementById('Bunchange').innerHTML = Bun;
-	Hyoka = 'Measuring...';
+	Hyoka = 'Analyzing...';
 	document.getElementById('Hyokachange').innerText = Hyoka;
 	}
 
