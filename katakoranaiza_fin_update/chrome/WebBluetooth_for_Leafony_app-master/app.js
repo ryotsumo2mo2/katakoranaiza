@@ -360,7 +360,7 @@ const main = (fr0) =>{
 	 Hyoka = 'Very hard!';
 	 document.getElementById('Hyokachange').innerText = Hyoka;
 	 Hyokachange.style.color = '#E64242';
-	 Bun = '・Give massages and stretches to relax the muscles. <br>Consult a specialist to learn how to do this properly.<br><br>・Try using warm towels or compresses to relieve stiffness.<br><br>・Pay attention to your posture in daily life and try not to stay in the same position for long periods of time.';
+	 Bun = 'Your neck and back muscles are extremely hard.<br>Your symptoms could be worse than you expect.<br><br>advice<br><br>・Give massages and stretches<br>・Try using hot towels or taking bath to warm your neck and back pain<br>・Consider going to go a medical facility if you can’t cure<br>';
 	 document.getElementById('Bunchange').innerHTML = Bun;
 	} // verybad
   else if ( maxSinpuku >= 0.05 && maxSinpuku > 0.07) {
@@ -369,7 +369,7 @@ const main = (fr0) =>{
 	 Hyoka = 'Hard';
 	 document.getElementById('Hyokachange').innerText = Hyoka;
 	 Hyokachange.style.color = '#E5C842';
-	 Bun = '・Include stretches and light exercises to stretch the shoulder and neck muscles and relieve muscle tension.<br><br>・Take moderate breaks when working at a desk or using a smartphone for long periods of time in order to maintain the middle posture.<br><br>・Consider incorporating light strength training to strengthen the muscles around the shoulders.';
+	 Bun = 'Include stretches and light exercise your neck and back muscles<br><br>advice<br><br>・Take moderate breaks through your using smartphones or PCs for a long time<br>・Stretch your neck and back muscles and consider working out a little<br>';
 	 document.getElementById('Bunchange').innerHTML = Bun;
 	} // bad
   else if ( maxSinpuku >= 0.03 && maxSinpuku > 0.05) {
@@ -378,7 +378,7 @@ const main = (fr0) =>{
 	 Hyoka = 'Soft';
 	 document.getElementById('Hyokachange').innerText = Hyoka;
 	 Hyokachange.style.color = '#4AE642';
-	 Bun = '・Pay attention to your posture in everyday life. <br>Maintaining correct posture helps prevent stiff shoulders.<br><br>・Do daily stretching and light exercise to keep shoulder and neck muscles soft.<br><br>・It is important to take some time out of your busy routine and create a relaxing environment. <br>Get some rest to reduce stress.';
+	 Bun = 'Pay your attention to your poseure and lifestyle in everyday life<br><br>advice<br><br>・Do daily stretch and light exercise to keep your condition<br>・Have a break to create relaxing time through your daily life to decrease stress<br>';
 	 document.getElementById('Bunchange').innerHTML = Bun;
 	} // good
   else if ( maxSinpuku < 0.03) {
@@ -387,7 +387,7 @@ const main = (fr0) =>{
 	 Hyoka = 'Very soft!';
 	 document.getElementById('Hyokachange').innerText = Hyoka;
 	 Hyokachange.style.color = '#425FE6';
-	 Bun = '・Although you do not seem to have any symptoms of stiff shoulders at present, <br>try to prevent it by paying attention to your posture and exercise habits in your daily life.<br>・Keep your muscles healthy by regularly stretching and strength training.<br>・Take moderate breaks and adjust your posture when working at a desk or using a smartphone for long periods of time.';
+	 Bun = 'You don’t seem to have any symptoms of Katakori<br><br>advice<br><br>・Keep your condition to have stretch<br>・Have moderate breaks and adjust your posture while using smartphones or PCs<br>';
 	 document.getElementById('Bunchange').innerHTML = Bun;
 	} // verygood
   // 指定の範囲に該当するデータの数を出力
