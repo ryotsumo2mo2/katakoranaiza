@@ -28,7 +28,7 @@ const textDice = document.getElementById('textDice');
 
 var image = document.getElementById('image');
 var AppN = 0;
-var Hyoka = 'Health for humanity';
+var Hyoka = 'Make humanity helthier';
 var Bun = 'Take measurements about your KATAKORI.';
 
 console.log(AppN)
