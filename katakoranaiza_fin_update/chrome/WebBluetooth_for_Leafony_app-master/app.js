@@ -433,10 +433,11 @@ const main = (fr0) =>{
         // options: {}, ...
       });
       console.log(myChart);
-      */
+      
 	  
 }
-
+*/
+	
 const kansuu = ( F ) => 
     F.map((v,i) => {
     const zettaiti = Math.sqrt(v[0]**2+v[1]**2);
