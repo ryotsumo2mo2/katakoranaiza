@@ -398,7 +398,6 @@ const main = (fr0) =>{
 	//以上追加点------------------
 
 	//グラフ非表示は以下をコメントアウト
-	
     const myChart = new Chart(ctx, {
         type: 'scatter',
         data: {
@@ -433,8 +432,6 @@ const main = (fr0) =>{
         // options: {}, ...
       });
       console.log(myChart);
-      
-	  
 }
 
 	
